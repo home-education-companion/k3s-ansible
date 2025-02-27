@@ -2,3 +2,6 @@
 *.log
 ansible.cfg
 kubeconfig
+.ansible-lint/
+.ansible/
+.idea/

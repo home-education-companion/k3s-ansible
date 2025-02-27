@@ -1,0 +1,12 @@
+---
+- name: Remove open-iscsi
+  ansible.builtin.apt:
+    name: open-iscsi
+    state: absent
+  when: ansible_os_family in [ "Debian" ]
+
+- name: Remove nfs-common
+  ansible.builtin.apt:
+    name: nfs-common
+    state: absent
+  when: ansible_os_family in [ "Debian" ]

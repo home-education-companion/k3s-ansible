@@ -37,6 +37,11 @@
 
 - name: Setup k3s servers
   hosts: master
+  # For rolling upgrades of an existing HA cluster, run with -e server_serial=1 so
+  # servers restart one at a time and etcd keeps quorum. The default (all at once)
+  # must be kept for fresh installs: the role's join verification waits for every
+  # master, which deadlocks under serial=1 when the other masters don't exist yet.
+  serial: "{{ server_serial | default('100%') }}"
   environment: "{{ proxy_env | default({}) }}"
   roles:
     - role: k3s_server
